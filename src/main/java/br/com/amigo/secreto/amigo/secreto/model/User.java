@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 @Entity
@@ -13,40 +14,104 @@ import java.time.LocalDateTime;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_user;
+    @Column(name = "id_user")
+    private Long idUser;
 
     @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Column(name = "password_hash", nullable = false)
     private String hashedPassword;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "auth_provider",nullable = false)
     private AuthProviderEnum authProvider;
 
     @Column(nullable = false)
     private String name;
 
-    private String avatar_url;
-    private String id_google;
+    @Column(name = "avatar_url")
+    private String avatarUrl;
 
-    @Column(nullable = false)
-    private String phoneNumber;
+    @Column(name = "id_google")
+    private String idGoogle;
+
+    @Column(name = "phone_number",nullable = false)
+    private BigInteger phoneNumber;
 
     @CreationTimestamp
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public Long getId_user() {
-        return id_user;
+    private User(Builder builder) {
+        this.email = builder.email;
+        this.hashedPassword = builder.hashedPassword;
+        this.authProvider = builder.authProvider;
+        this.name = builder.name;
+        this.avatarUrl = builder.avatarUrl;
+        this.idGoogle = builder.idGoogle;
+        this.phoneNumber = builder.phoneNumber;
     }
 
-    public void setId_user(Long id_user) {
-        this.id_user = id_user;
+    public static class Builder {
+        private String email;
+        private String hashedPassword;
+        private AuthProviderEnum authProvider;
+        private String name;
+        private String avatarUrl;
+        private String idGoogle;
+        private BigInteger phoneNumber;
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder hashedPassword(String hashedPassword) {
+            this.hashedPassword = hashedPassword;
+            return this;
+        }
+
+        public Builder authProvider(AuthProviderEnum authProvider) {
+            this.authProvider = authProvider;
+            return this;
+        }
+
+        public Builder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder avatarUrl(String avatarUrl) {
+            this.avatarUrl = avatarUrl;
+            return this;
+        }
+
+        public Builder idGoogle(String idGoogle) {
+            this.idGoogle = idGoogle;
+            return this;
+        }
+
+        public Builder phoneNumber(BigInteger phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public User build() {
+            return new User(this);
+        }
+    }
+
+    public Long getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
     }
 
     public String getEmail() {
@@ -81,27 +146,27 @@ public class User {
         this.name = name;
     }
 
-    public String getAvatar_url() {
-        return avatar_url;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setAvatar_url(String avatar_url) {
-        this.avatar_url = avatar_url;
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
-    public String getId_google() {
-        return id_google;
+    public String getIdGoogle() {
+        return idGoogle;
     }
 
-    public void setId_google(String id_google) {
-        this.id_google = id_google;
+    public void setIdGoogle(String idGoogle) {
+        this.idGoogle = idGoogle;
     }
 
-    public String getPhoneNumber() {
+    public BigInteger getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(BigInteger phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -119,5 +184,21 @@ public class User {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "idUser=" + idUser +
+                ", email='" + email + '\'' +
+                ", hashedPassword='" + hashedPassword + '\'' +
+                ", authProvider=" + authProvider +
+                ", name='" + name + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", idGoogle='" + idGoogle + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }
