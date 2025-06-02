@@ -1,0 +1,33 @@
+package br.com.secret.friend.model;
+
+import br.com.secret.friend.dto.giftDTO.WishListRequesterDTO;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "wish_lists")
+@Setter
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "idWishList")
+public class WishList {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "wish_list_id")
+    private Long idWishList;
+
+    @ManyToOne
+    @JoinColumn(name = "gift_id", nullable = false)
+    private Gift gift;
+
+    @OneToOne
+    @JoinColumn(name = "user_group_id", nullable = false)
+    private UserGroup userGroup;
+
+    public WishList(Gift gift,UserGroup userGroup) {
+        this.gift = gift;
+        this.userGroup = userGroup;
+    }
+}
