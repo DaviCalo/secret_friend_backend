@@ -13,7 +13,7 @@ public class UserRegisterDTO {
     private String name;
 
     @NotBlank()
-    @Email(message = "Email inválido")
+    @Email()
     private String email;
 
     @NotBlank()
@@ -26,22 +26,22 @@ public class UserRegisterDTO {
     @NotNull
     private AuthProviderEnum authProvider;
 
+    private String idGoogle;
+    private String avatarUrl;
+
+    public UserRegisterDTO(String name, String email, String password, String avatarUrl) {
+        this.name = name != null ? name.trim() : null;
+        this.email = email != null ? email.trim() : null;
+        this.password = password != null ? password.trim() : null;
+        this.avatarUrl = avatarUrl != null ? avatarUrl.trim() : null;
+    }
+
     public String getIdGoogle() {
         return idGoogle;
     }
 
     public void setIdGoogle(String idGoogle) {
         this.idGoogle = idGoogle;
-    }
-
-    private String idGoogle;
-    private String avatarUrl;
-
-    public UserRegisterDTO(String name, String email, String password, String avatarUrl) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.avatarUrl = avatarUrl;
     }
 
     public BigInteger getPhoneNumber() {

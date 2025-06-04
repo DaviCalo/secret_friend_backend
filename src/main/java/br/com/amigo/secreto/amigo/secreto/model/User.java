@@ -1,7 +1,6 @@
 package br.com.amigo.secreto.amigo.secreto.model;
 
 import br.com.amigo.secreto.amigo.secreto.utils.AuthProviderEnum;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
