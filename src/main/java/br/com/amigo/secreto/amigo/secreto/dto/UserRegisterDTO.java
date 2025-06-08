@@ -20,7 +20,6 @@ public class UserRegisterDTO {
     @Size(min = 8)
     private String password;
 
-    @NotBlank()
     private BigInteger phoneNumber;
 
     @NotNull

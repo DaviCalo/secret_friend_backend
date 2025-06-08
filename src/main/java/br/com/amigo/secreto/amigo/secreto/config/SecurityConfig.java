@@ -12,11 +12,14 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(authorize -> authorize
-                    .requestMatchers("/user").permitAll()
-                    .anyRequest().authenticated()
-            );
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/user/**").permitAll()
+                        .requestMatchers("/group/**").permitAll()
+                        .anyRequest().authenticated()
+                );
         return http.build();
     }
+    // TODO verificar esses acessos
 }

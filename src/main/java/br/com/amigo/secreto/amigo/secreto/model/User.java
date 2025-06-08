@@ -7,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -35,7 +36,7 @@ public class User {
     @Column(name = "id_google")
     private String idGoogle;
 
-    @Column(name = "phone_number",nullable = false)
+    @Column(name = "phone_number")
     private BigInteger phoneNumber;
 
     @CreationTimestamp
@@ -45,6 +46,11 @@ public class User {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Group> created_groups; //ver se ta certo
+
+    public User() {}
 
     private User(Builder builder) {
         this.email = builder.email;
