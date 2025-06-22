@@ -1,12 +1,9 @@
 package br.com.amigo.secreto.amigo.secreto.controller;
 
 import br.com.amigo.secreto.amigo.secreto.dto.GroupRegisterDTO;
-import br.com.amigo.secreto.amigo.secreto.dto.UserRegisterDTO;
-import br.com.amigo.secreto.amigo.secreto.dto.UserResponseDTO;
 import br.com.amigo.secreto.amigo.secreto.model.Group;
 import br.com.amigo.secreto.amigo.secreto.model.User;
 import br.com.amigo.secreto.amigo.secreto.service.GroupService;
-import br.com.amigo.secreto.amigo.secreto.service.UserService;
 import br.com.amigo.secreto.amigo.secreto.utils.StatusGroupEnum;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +21,8 @@ public class GroupController {
     @Autowired
     private GroupService groupService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<String> registerGroup(@Valid @RequestBody GroupRegisterDTO userDto) {
-
         Group newGroup = new Group.Builder()
                 .user(new User())
                 .name(userDto.getName())

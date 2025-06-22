@@ -1,11 +1,9 @@
 package br.com.amigo.secreto.amigo.secreto.model;
 
-import br.com.amigo.secreto.amigo.secreto.utils.AuthProviderEnum;
 import br.com.amigo.secreto.amigo.secreto.utils.StatusGroupEnum;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.time.LocalDate;
 
 @Entity

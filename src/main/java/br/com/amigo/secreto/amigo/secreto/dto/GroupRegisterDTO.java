@@ -1,15 +1,7 @@
 package br.com.amigo.secreto.amigo.secreto.dto;
 
-import br.com.amigo.secreto.amigo.secreto.model.User;
-import br.com.amigo.secreto.amigo.secreto.utils.AuthProviderEnum;
-import br.com.amigo.secreto.amigo.secreto.utils.StatusGroupEnum;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
