@@ -4,7 +4,9 @@ import br.com.amigo.secreto.amigo.secreto.dto.UserDTO;
 import br.com.amigo.secreto.amigo.secreto.model.User;
 import br.com.amigo.secreto.amigo.secreto.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,8 +19,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Transactional
     public User createUser(User user) {
-        user.setCreatedAt(LocalDateTime.now());
+        String hashedPassword = passwordEncoder.encode(user.getHashedPassword());
+        user.setHashedPassword(hashedPassword);
         return userRepository.save(user);
     }
 
