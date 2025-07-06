@@ -5,13 +5,14 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "groups")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_group")
+    @Column(name = "group_id")
     private Long idGroup;
 
     private String name;
@@ -22,10 +23,6 @@ public class Group {
     @Column(name = "draw_date")
     private LocalDate drawDate;
 
-    @ManyToOne()
-    @JoinColumn(name = "creator_user_id")
-    private User user;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "status_group")
     private StatusGroupEnum statusGroup;
@@ -35,6 +32,13 @@ public class Group {
 
     @Column(name = "minimum_value")
     private BigDecimal minimumValue;
+
+    @ManyToOne()
+    @JoinColumn(name = "creator_user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<UserGroup> userGroup;
 
     private Group() {}
 
@@ -164,7 +168,5 @@ public class Group {
         return minimumValue;
     }
 
-    public void setMinimumValue(BigDecimal minimumValue) {
-        this.minimumValue = minimumValue;
-    }
+    public void setMinimumValue(BigDecimal minimumValue) { this.minimumValue = minimumValue; }
 }

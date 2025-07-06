@@ -14,7 +14,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_user")
+    @Column(name = "user_id")
     private Long idUser;
 
     @Column(unique = true, nullable = false)
@@ -48,7 +48,10 @@ public class User {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Group> created_groups; //ver se ta certo
+    private List<Group> groupsCreated;
+
+    @OneToMany(mappedBy = "idSenderUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<UserGroup> userGroups;
 
     public User() {}
 
