@@ -1,6 +1,7 @@
 package br.com.amigo.secreto.amigo.secreto.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,6 +9,12 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users_groups")
+@Setter
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "idUserGroup")
 public class UserGroup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,6 +50,4 @@ public class UserGroup {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    void UserGroup(){}
 }

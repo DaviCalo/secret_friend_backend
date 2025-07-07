@@ -1,4 +1,4 @@
-package br.com.amigo.secreto.amigo.secreto.dto;
+package br.com.amigo.secreto.amigo.secreto.dto.userDTO;
 
 import br.com.amigo.secreto.amigo.secreto.utils.AuthProviderEnum;
 import jakarta.validation.constraints.Email;

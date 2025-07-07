@@ -1,11 +1,18 @@
 package br.com.amigo.secreto.amigo.secreto.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "letters")
+@Setter
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "idLetter")
 public class Letter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

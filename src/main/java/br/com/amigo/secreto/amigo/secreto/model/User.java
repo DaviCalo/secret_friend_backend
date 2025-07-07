@@ -1,5 +1,7 @@
 package br.com.amigo.secreto.amigo.secreto.model;
 
+import br.com.amigo.secreto.amigo.secreto.dto.userDTO.UserRequesterDTO;
+import br.com.amigo.secreto.amigo.secreto.dto.userDTO.UserUpdateDTO;
 import br.com.amigo.secreto.amigo.secreto.utils.AuthProviderEnum;
 import jakarta.persistence.*;
 import lombok.*;
@@ -60,6 +62,15 @@ public class User {
     @OneToMany(mappedBy = "idSenderUser", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<UserGroup> userGroups;
 
+    public User(UserRequesterDTO userDto) {
+        this.email = userDto.email();
+        this.hashedPassword = userDto.password();
+        this.authProvider = userDto.authProvider();
+        this.name = userDto.name();
+        this.idGoogle = userDto.idGoogle();
+        this.phoneNumber = userDto.phoneNumber();
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -74,5 +85,26 @@ public class User {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
+    }
+
+    public void updateInformation(UserUpdateDTO userDto) {
+        if (userDto.email() != null) {
+            this.email = userDto.email();
+        }
+        if (userDto.authProvider() != null) {
+            this.authProvider = userDto.authProvider();
+        }
+        if (userDto.name() != null) {
+            this.name = userDto.name();
+        }
+        if (userDto.avatarUrl() != null) {
+            this.avatarUrl = userDto.avatarUrl();
+        }
+        if (userDto.idGoogle() != null) {
+            this.idGoogle = userDto.idGoogle();
+        }
+        if (userDto.phoneNumber() != null) {
+            this.phoneNumber = userDto.phoneNumber();
+        }
     }
 }

@@ -13,11 +13,6 @@ public class GroupController {
     @Autowired
     private GroupService groupService;
 
-    @GetMapping
-    public String fasdf(){
-        return "sdfsdv";
-    }
-
 //    @PostMapping("/create")
 //    public ResponseEntity<String> registerGroup(@Valid @RequestBody GroupRegisterDTO userDto) {
 //        Group newGroup = new Group.Builder()

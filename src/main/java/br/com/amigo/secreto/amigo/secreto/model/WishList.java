@@ -1,9 +1,16 @@
 package br.com.amigo.secreto.amigo.secreto.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "wish_lists")
+@Setter
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "idWishList")
 public class WishList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +24,4 @@ public class WishList {
     @OneToOne
     @JoinColumn(name = "user_group_id", nullable = false)
     private UserGroup userGroup;
-
-    WishList(){}
 }
