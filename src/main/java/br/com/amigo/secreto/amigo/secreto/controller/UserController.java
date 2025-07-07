@@ -17,68 +17,37 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-
     @Autowired
     private UserService userService;
 
     @PostMapping()
     public ResponseEntity<UserResponseDTO> registerUser(@RequestBody @Valid UserRequesterDTO userDto, UriComponentsBuilder uriComponentsBuilder) {
-        try {
-            UserResponseDTO responseDto = userService.createUser(new User(userDto));
-            URI uri = uriComponentsBuilder.path("/api/user/{id}").buildAndExpand(responseDto.idUser()).toUri();
-
-            return ResponseEntity.created(uri).body(responseDto);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        UserResponseDTO responseDto = userService.createUser(new User(userDto));
+        URI uri = uriComponentsBuilder.path("/api/user/{id}").buildAndExpand(responseDto.idUser()).toUri();
+        return ResponseEntity.created(uri).body(responseDto);
     }
 
     @PutMapping
     public ResponseEntity<UserResponseDTO> updateUser(@RequestBody @Valid UserUpdateDTO userDto){
-        try {
-            UserResponseDTO checkIdUser = userService.findById(userDto.userId());
-            if (checkIdUser == null){
-                return ResponseEntity.notFound().build();
-            }
-
-            UserResponseDTO responseDto = userService.updateUser(userDto);
-            return ResponseEntity.ok(responseDto);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        UserResponseDTO responseDto = userService.updateUser(userDto);
+        return ResponseEntity.ok(responseDto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id){
-        try {
-            Boolean user = userService.deleteById(id);
-            if(user){
-                return ResponseEntity.noContent().build();
-            } else {
-                return ResponseEntity.notFound().build();
-            }
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        Boolean user = userService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<UserResponseDTO>> findAllUsers(){
-        try {
-            List<UserResponseDTO> listUser = userService.findAllUsers();
-            return ResponseEntity.ok(listUser);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        List<UserResponseDTO> listUser = userService.findAllUsers();
+        return ResponseEntity.ok(listUser);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> findById(@PathVariable Long id){
-        try {
-            UserResponseDTO user = userService.findById(id);
-            return ResponseEntity.ok(user);
-        } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        UserResponseDTO user = userService.findById(id);
+        return ResponseEntity.ok(user);
     }
 }
