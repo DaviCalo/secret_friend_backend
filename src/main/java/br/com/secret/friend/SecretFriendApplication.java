@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AmigoSecretoApplication {
+public class SecretFriendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AmigoSecretoApplication.class, args);
+		SpringApplication.run(SecretFriendApplication.class, args);
 	}
 
 }
