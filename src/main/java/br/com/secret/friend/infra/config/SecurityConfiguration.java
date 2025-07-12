@@ -23,18 +23,6 @@ public class SecurityConfiguration {
     @Autowired
     private SecurityFilter securityFilter;
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        http
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(authorize -> authorize
-//                        .requestMatchers("api/user/**").permitAll()
-//                        .requestMatchers("api/group/**").permitAll()
-//                        .anyRequest().authenticated()
-//                );
-//        return http.build();
-//    }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return
@@ -42,6 +30,7 @@ public class SecurityConfiguration {
                         .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .authorizeHttpRequests(req -> {
                             req.requestMatchers("api/login").permitAll();
+                            req.requestMatchers( "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
                             req.requestMatchers(HttpMethod.POST, "api/user").permitAll();
                             req.anyRequest().authenticated();
                         }).addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

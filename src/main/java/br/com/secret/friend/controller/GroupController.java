@@ -1,12 +1,14 @@
 package br.com.secret.friend.controller;
 
 import br.com.secret.friend.service.GroupService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/group")
+@SecurityRequirement(name = "bearer-key")
 public class GroupController {
 
     @Autowired
